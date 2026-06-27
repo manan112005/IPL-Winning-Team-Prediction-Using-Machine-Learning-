@@ -6,7 +6,7 @@ from sklearn.compose import ColumnTransformer
 from joblib import dump
 
 # Load data
-df = pd.read_csv("E:\INTERNPE\TASK3/data.csv")
+df = pd.read_csv("TASK3/data.csv")
 
 # Drop irrelevant columns
 drop_cols = ['mid','date','venue','batsman','bowler','striker','non-striker']
