@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IPL Winning Probability Predictor</title>
+</head>
+<body>
+
+<h2>IPL Winning Probability Predictor</h2>
+
+<form method="POST">
+
+  <select name="batting_team" required>
+    <option value="" disabled {% if not form.get('batting_team') %}selected{% endif %}>
+        Select Batting Team
+    </option>
+    {% for team in teams %}
+    <option value="{{ team }}" {% if form.get('batting_team') == team %}selected{% endif %}>
+        {{ team }}
+    </option>
+    {% endfor %}
+</select><br><br>
+
+    <select name="bowling_team" required>
+    <option value="" disabled {% if not form.get('bowling_team') %}selected{% endif %}>
+        Select Bowling Team
+    </option>
+    {% for team in teams %}
+    <option value="{{ team }}" {% if form.get('bowling_team') == team %}selected{% endif %}>
+        {{ team }}
+    </option>
+    {% endfor %}
+</select><br><br>
+
+    <select name="venue" required>
+    <option value="" disabled {% if not form.get('venue') %}selected{% endif %}>
+        Select Venue
+    </option>
+    {% for v in venues %}
+    <option value="{{ v }}" {% if form.get('venue') == v %}selected{% endif %}>
+        {{ v }}
+    </option>
+    {% endfor %}
+</select><br><br>
+
+    <input type="number" name="runs" placeholder="Current Runs"
+           value="{{ form.get('runs','') }}" required><br><br>
+
+    <input type="number" name="wickets" placeholder="Wickets Lost"
+           value="{{ form.get('wickets','') }}" required><br><br>
+
+    <input type="text" name="overs" placeholder="Overs Completed (e.g. 12.3)"
+           value="{{ form.get('overs','') }}" required><br><br>
+
+    <input type="number" name="runs_last_5" placeholder="Runs in Last 5 Overs"
+           value="{{ form.get('runs_last_5','') }}" required><br><br>
+
+    <input type="number" name="wickets_last_5" placeholder="Wickets in Last 5 Overs"
+           value="{{ form.get('wickets_last_5','') }}" required><br><br>
+
+    <button type="submit">Predict Winning Probability</button>
+</form>
+
+{% if batting_prob %}
+<hr>
+<h3>{{ batting_team }} Winning Probability: {{ batting_prob }}%</h3>
+<h3>{{ bowling_team }} Winning Probability: {{ bowling_prob }}%</h3>
+<p><b>Venue:</b> {{ venue }}</p>
+{% endif %}
+
+</body>
+</html>
